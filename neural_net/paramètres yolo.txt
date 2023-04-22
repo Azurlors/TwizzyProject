@@ -1,0 +1,7 @@
+paramètres yolo:
+
+cd yolov5
+pip install -r requirements.txt
+pip install ultralytics
+
+python train.py --data coco128.yaml --epochs 50 -- weights yolov5n.pt --cfg yolov5n.yaml -- batch-size 32
