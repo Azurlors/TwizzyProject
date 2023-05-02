@@ -4,4 +4,4 @@ cd yolov5
 pip install -r requirements.txt
 pip install ultralytics
 
-python train.py --data Test.yaml --epochs 60 --weights yolov5s.pt --cfg yolov5s.yaml --batch-size 32
+python train.py --data Test.yaml --epochs 80 --weights yolov5s.pt --batch-size 12
