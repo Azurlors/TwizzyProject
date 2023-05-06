@@ -4,4 +4,14 @@ cd yolov5
 pip install -r requirements.txt
 pip install ultralytics
 
-python train.py --data Test.yaml --epochs 80 --weights yolov5s.pt --batch-size 12
+******************** training ******************************************************
+python train.py --data Test.yaml --epochs 60 --weights yolov5s.pt --cfg yolov5s.yaml --batch-size 32
+
+******************** validation ****************************************************
+python val.py --weights best.pt --data coco128.yaml --img 640
+
+******************** detect (ce qu'il faudra faire sur l'appli java) ***************
+python detect.py --weights best.pt --source image_test.jpg
+
+Sachant que dans la source on met n'importe quelle image/video (avec son path quand meme). Le fichier de poids best.pt est celui calculé avec le training, il faut le mettre
+(si il n'y est pas) dans le dossier yolov5
