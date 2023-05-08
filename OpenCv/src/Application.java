@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -89,7 +90,7 @@ public class Application extends JFrame{
     private void createUIComponents() {
         //initialisation avec une image vide (evite erreur null)
         try{
-            img = ImageIO.read(new File("C:\\Users\\abell\\Desktop\\2A\\Semestre_8\\Twizzy\\myOpenCV\\OpenCv\\invisible.png"));
+            img = ImageIO.read(new File(Paths.get(".").toAbsolutePath().normalize().toString() + "\\invisible.png"));
         }
         catch (IOException e)
         {
@@ -100,7 +101,11 @@ public class Application extends JFrame{
     }
 
     private void yoloDetection(){
-        String directoryPath = "C:\\Users\\abell\\Desktop\\2A\\Semestre_8\\Twizzy\\TwizzyProject\\neural_net\\yolov5"; // replace with your desired directory path
+        String directoryPath = Paths.get(".").toAbsolutePath().normalize().toString(); // replace with your desired directory path
+        int index = directoryPath.lastIndexOf('\\');
+        directoryPath = directoryPath.substring(0, index);
+        directoryPath = directoryPath.substring(0, index);
+        directoryPath = directoryPath + "\\neural_net\\yolov5";
         String command = "python detect.py --weights epoch160_batch6.pt --source "+selectedFile.getAbsolutePath(); // replace with your desired command
 
         try {
@@ -113,12 +118,19 @@ public class Application extends JFrame{
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        String filePath = "C:\\Users\\abell\\Desktop\\2A\\Semestre_8\\Twizzy\\TwizzyProject\\neural_net\\yolov5\\runs\\detect\\exp\\"+selectedFile.getName();
+        String filePath = Paths.get(".").toAbsolutePath().normalize().toString(); // replace with your desired directory path
+        filePath  = filePath .substring(0, index);
+        filePath  = filePath .substring(0, index);
+        filePath = filePath + "\\neural_net\\yolov5\\runs\\detect\\exp\\"+selectedFile.getName();
         System.out.println("Selected file Yolo: " + filePath);
         selectedFile = new File(filePath);
     }
     private void deleteExpDirectory(){
-        String directoryPath = "C:\\Users\\abell\\Desktop\\2A\\Semestre_8\\Twizzy\\TwizzyProject\\neural_net\\yolov5\\runs\\detect\\exp";
+        String directoryPath =Paths.get(".").toAbsolutePath().normalize().toString(); // replace with your desired directory path
+        int index = directoryPath.lastIndexOf('\\');
+        directoryPath = directoryPath.substring(0, index);
+        directoryPath = directoryPath.substring(0, index);
+        directoryPath = directoryPath + "\\neural_net\\yolov5\\runs\\detect\\exp";
         File directory = new File(directoryPath);
 
         if (directory.exists()) {
