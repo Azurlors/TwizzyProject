@@ -29,7 +29,10 @@ public class Application extends JFrame{
         btnImport.addActionListener(e -> {
             //selection d'une image depuis l'explorateur de fichier
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            String directoryPath = Paths.get(".").toAbsolutePath().normalize().toString(); // replace with your desired directory path
+            int index = directoryPath.lastIndexOf('\\');
+            directoryPath = directoryPath.substring(0, index);
+            fileChooser.setCurrentDirectory(new File(directoryPath));
             int result = fileChooser.showOpenDialog(h);
             if (result == JFileChooser.APPROVE_OPTION) {
                 selectedFile = fileChooser.getSelectedFile();
